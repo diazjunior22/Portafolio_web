@@ -179,7 +179,7 @@ AUTH_PASSWORD_VALIDATORS = [
 CSRF_TRUSTED_ORIGINS = [
         #"https://*.ngrok-free.app"
         
-        "https://*.railway.app"
+        "https://*.railway.app",
 
 
 ]
