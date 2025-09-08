@@ -132,7 +132,7 @@ if DB_LIVE in ['False' , False]:
 else:
     DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
+        default=os.getenv('DATABASE_URL'),
         conn_max_age=600,
         ssl_require=True
     )
@@ -169,10 +169,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 #solo para  compartir mi pagina a otra persona
-# CSRF_TRUSTED_ORIGINS = [
-#         "https://*.ngrok-free.app"
+CSRF_TRUSTED_ORIGINS = [
+        #"https://*.ngrok-free.app"
+        
+        'https://portafolioweb-production-609a.up.railway.app/'
 
-# ]
+]
 
 
 # Internationalization
