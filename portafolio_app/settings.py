@@ -37,7 +37,11 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 
 #'.ngrok-free.app'
-ALLOWED_HOSTS = ["localhost" ,"https://portafolioweb-production-609a.up.railway.app/"]
+ALLOWED_HOSTS = [
+        "localhost",
+    "127.0.0.1",
+    ".railway.app",
+]
 
 DB_LIVE = os.getenv("DB_LIVE")
 
