@@ -1,0 +1,9 @@
+$ pip install python-dotenv
+
+
+$ pip install gunicorn
+$ pip install whitenoise
+$ pip freeze >requierements.txt
+
+esto es para producion para recargar la pagina
+django-browser-reload==1.18.0

@@ -1,0 +1,71 @@
+{% extends "home.html" %}
+
+{% block content %}
+
+<header class="bg-gray-900 text-white py-40 ">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h1 class="text-4xl font-extrabold mb-4">📰 BLOG JX</h1>
+    <p class="text-lg text-gray-300 mb-6">Encuentra mis últimos artículos y tutoriales.</p>
+
+<form method="GET" action="{% url 'search' %}" class="flex justify-center">
+      <input type="text" name="q" placeholder="Buscar un post..." value='{{ query }}'
+             class="w-1/2 px-4 py-2 rounded-l-lg text-gray-900 focus:outline-none" >
+      <button type="submit" class="bg-black  px-4 py-2 rounded-r-lg hover:bg-indigo-600 transition">
+        Buscar
+      </button>
+    </form>
+  </div>
+</header>
+
+
+
+
+
+<section id="blog" class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl md:text-5xl font-bold text-center text-white mb-12">
+      Últimos Posts
+    </h2>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for post in posts %}
+      <article class="border border-border rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition">
+        {% if post.imagen %}
+        <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" class="w-full h-48 object-cover">
+        {% endif %}
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-black mb-2">{{ post.titulo }}</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            {{ post.created_at|date:"d M Y" }}
+          </p>
+          <p class="text-muted-foreground mb-6">
+            {{ post.contenido|truncatewords:20 }}
+          </p>
+          <a href="{% url 'detallePost' post.id %}"
+             class="border border-border px-4 py-2 rounded-lg font-medium hover:bg-muted transition-colors text-white bg-black">
+            Leer más
+          </a>
+        </div>
+      </article>
+      {% empty %}
+      <p class="text-gray-400 text-center col-span-3">No hay posts publicados aún.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+

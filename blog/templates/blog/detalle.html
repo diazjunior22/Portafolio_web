@@ -1,0 +1,49 @@
+{% extends "home.html" %}
+
+
+
+
+{% block content %}
+
+<section id="post-detail" class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-White text-black">
+  <div class="max-w-3xl mx-auto">
+    <!-- Título -->
+    <h1 class="text-4xl md:text-5xl font-bold text-black  mb-4">
+      {{ post.titulo }}
+    </h1>
+
+    <!-- Fecha -->
+    <p class="text-black  text-sm mb-8">
+      Publicado el {{ post.creado |date:"d/M/Y" }}
+    </p>
+
+    <!-- Imagen -->
+    {% if post.imagen %}
+      <img src="{{ post.imagen.url }}" 
+           alt="{{ post.titulo }}" 
+           class="w-full h-80 object-cover rounded-2xl mb-8 border border-border ">
+    {% endif %}
+
+    <!-- Contenido -->
+    <div class="prose prose-invert max-w-none text-black-300">
+      {{ post.contenido|linebreaks }}
+    </div>
+
+    <!-- Botón regresar -->
+    <div class="mt-12">
+      <a href="{% url 'listaPost' %}"
+         class="border border-border px-6 py-3 rounded-lg font-medium hover:bg-muted transition-colors text-white bg-black">
+        ← Volver al Blog
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+{% endblock content %}
+

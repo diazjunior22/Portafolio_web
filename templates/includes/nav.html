@@ -1,0 +1,63 @@
+<!-- Navigation -->
+<nav class="fixed top-0 w-full bg-black text-white border-b border-gray-700 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <!-- Logo -->
+            <div class="font-heading font-bold text-xl text-white">
+                {% if request.resolver_match.url_name == 'listaPost' or request.resolver_match.url_name == 'detallePost' %}
+                    JX BLOG
+                {% else %}
+                    JX PORTAFOLIO
+                {% endif %}
+            </div>
+
+            <!-- Links escritorio -->
+            <div class="hidden md:flex space-x-8">
+                <a href="{% url 'home' %}#incio" class="hover:text-gray-300 transition-colors">Inicio</a>
+                <a href="{% url 'home' %}#sobre-mi" class="hover:text-gray-300 transition-colors">Sobre Mí</a>
+                <a href="{% url 'home' %}#portafolio" class="hover:text-gray-300 transition-colors">Portafolio</a>
+                <a href="{% url 'listaPost' %}" class="hover:text-gray-300 transition-colors">Blog</a>
+                <a href="{% url 'home' %}#contacto" class="hover:text-gray-300 transition-colors">Contacto</a>
+            </div>
+
+            <!-- Botón móvil -->
+                  <!-- Botón móvil -->
+      <button id="menu-btn" class="md:hidden p-2 text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+ 
+
+        </div>
+    </div>
+
+  <div id="menu" class="hidden md:hidden bg-black border-t border-gray-700">
+    <div class="flex flex-col space-y-2 px-4 py-4">
+      <a href="{% url 'home' %}#inicio" class="hover:text-gray-300">Inicio</a>
+      <a href="{% url 'home' %}#sobre-mi" class="hover:text-gray-300">Sobre Mí</a>
+      <a href="{% url 'home' %}#portafolio" class="hover:text-gray-300">Portafolio</a>
+      <a href="{% url 'listaPost' %}" class="hover:text-gray-300">Blog</a>
+      <a href="{% url 'home' %}#contacto" class="hover:text-gray-300">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+
+</nav>
+
+
+<!-- Script para abrir/cerrar menú -->
+
+{% block scripts %}
+<script>
+  const btn = document.getElementById("menu-btn");
+  const menu = document.getElementById("menu");
+
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+</script>
+
+{% endblock %}

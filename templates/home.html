@@ -1,0 +1,52 @@
+{%  load static %}
+
+
+<!DOCTYPE html>
+<html lang="en" class='h-full'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% if debug %}
+    <script src="{% static 'django_browser_reload/reload.js' %}"></script>
+    {% endif %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <script src="{% static 'js/app.js' %}"></script>
+
+    <style>
+        .font-heading { font-family: 'Work Sans', sans-serif; }
+        .font-body { font-family: 'Open Sans', sans-serif; }
+    </style>
+
+    
+    <title>PAGINA WEB</title>
+</head>
+<body class="bg-background text-foreground font-body h-full flex flex-col">
+    
+{% include "includes/nav.html" %}
+
+
+{% block content %}
+
+{% endblock %}
+
+
+
+
+
+
+{% include "includes/footer.html" %}
+
+
+
+
+
+
+
+  {% block scripts %}{% endblock %}
+
+
+
+</body>
+</html> 
