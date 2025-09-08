@@ -30,13 +30,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u3a-n$-=aobz-t1#vsse8w+wop0e56wzw-zyr23w$d74_e5!m*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False") == "True"
+
 
 
 
 
 #'.ngrok-free.app'
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost" ,"https://portafolioweb-production-609a.up.railway.app/"]
 
 DB_LIVE = os.getenv("DB_LIVE")
 
