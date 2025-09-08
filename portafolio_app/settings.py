@@ -30,15 +30,11 @@ SECRET_KEY = 'django-insecure-u3a-n$-=aobz-t1#vsse8w+wop0e56wzw-zyr23w$d74_e5!m*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    
-        'localhost',
-    '127.0.0.1',
-    #solo para mostrar web compartida en producion
-    '.ngrok-free.app'
-    
-    
-    ]
+
+
+
+#'.ngrok-free.app'
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -152,10 +148,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 #solo para  compartir mi pagina a otra persona
-CSRF_TRUSTED_ORIGINS = [
-        "https://*.ngrok-free.app"
+# CSRF_TRUSTED_ORIGINS = [
+#         "https://*.ngrok-free.app"
 
-]
+# ]
 
 
 # Internationalization
