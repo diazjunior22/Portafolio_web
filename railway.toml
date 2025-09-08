@@ -1,0 +1,6 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pip install -r requirements.txt"
+
+[start]
+command = "gunicorn portafolio_app.wsgi:application --bind 0.0.0.0:$PORT"
