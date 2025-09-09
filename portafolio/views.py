@@ -40,6 +40,8 @@ load_dotenv()
 
 import mailtrap as mt
 
+client = mt.MailtrapClient(token=os.getenv("MAILTRAP_API_KEY"))
+
 def enviar_correo(nombre, email, asunto, mensaje):
     token = "d645d0fae3fca7ab6351e54d83591802"
 
@@ -57,6 +59,7 @@ def enviar_correo(nombre, email, asunto, mensaje):
     #         "Content-Type": "application/json"
     # }
     # response = requests.post( url, headers=headers, json=payload)
+
     mail = mt.Mail(
         sender=mt.Address(email="juniordiazpalacio9@gmail.com", name=nombre),  
         to=[mt.Address(email="juniordiazpalacio9@gmail.com")],          
@@ -64,7 +67,6 @@ def enviar_correo(nombre, email, asunto, mensaje):
         text=f"De: {nombre} <{email}>\n\nMensaje:\n{mensaje}",
         category="Formulario Web",
     )
-    client = mt.MailtrapClient(token=os.getenv("MAILTRAP_API_KEY"))
     response = client.send(mail)
     return response 
 
