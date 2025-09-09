@@ -25,7 +25,7 @@ if settings.DEBUG:
         path('admin/', admin.site.urls),
         path('', include('portafolio.urls')),
         path('blog/', include('blog.urls')),
-            path("__reload__/", include("django_browser_reload.urls")),
+          #  path("__reload__/", include("django_browser_reload.urls")),
         
 
     ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
