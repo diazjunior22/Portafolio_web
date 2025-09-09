@@ -59,7 +59,7 @@ if DB_LIVE in ['False' , False]:
         'blog',
         'portafolio',
         #this is para roadload la pagina 
-        "django_browser_reload",
+#        "django_browser_reload",
 ]
 else:
         INSTALLED_APPS = [
@@ -88,7 +88,7 @@ if DB_LIVE in ['False' , False]:
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
-        "django_browser_reload.middleware.BrowserReloadMiddleware",        
+#        "django_browser_reload.middleware.BrowserReloadMiddleware",        
 ]
 else:    
     MIDDLEWARE = [
