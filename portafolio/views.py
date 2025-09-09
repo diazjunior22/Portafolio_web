@@ -17,6 +17,11 @@ from django.contrib import messages
 
 import  requests
 
+import os 
+from dotenv import load_dotenv
+
+
+load_dotenv()
 # Create your views here.
 
 
@@ -37,6 +42,7 @@ import mailtrap as mt
 
 def enviar_correo(nombre, email, asunto, mensaje):
     token = "d645d0fae3fca7ab6351e54d83591802"
+
     # payload = {
     #     "from": {"email": "hello@demomailtrap.com", "name": nombre},
     #     "to": [{"email": "juniordiazpalacio9@gmail.com"}],
@@ -58,8 +64,7 @@ def enviar_correo(nombre, email, asunto, mensaje):
         text=f"De: {nombre} <{email}>\n\nMensaje:\n{mensaje}",
         category="Formulario Web",
     )
-
-    client = mt.MailtrapClient(token=token)  
+    client = mt.MailtrapClient(token=os.getenv("MAILTRAP_API_KEY"))
     response = client.send(mail)
     return response 
 
