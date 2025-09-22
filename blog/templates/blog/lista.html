@@ -39,7 +39,8 @@
             {{ post.created_at|date:"d M Y" }}
           </p>
           <p class="text-muted-foreground mb-6">
-            {{ post.contenido|truncatewords:20 }}
+            {{ i.contenido|truncatewords:25|safe }}
+
           </p>
           <a href="{% url 'detallePost' post.id %}"
              class="border border-border px-4 py-2 rounded-lg font-medium hover:bg-muted transition-colors text-white bg-black">

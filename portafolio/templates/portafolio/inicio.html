@@ -144,7 +144,8 @@
                             </a>
                         </h3>
                         <p class="text-muted-foreground mb-4 leading-relaxed">
-                            {{i.contenido|truncatewords:20}}
+                            {{ i.contenido|truncatewords:25|safe }}
+
                         </p>
                         <a href="{% url 'detallePost' i.id %}" class="text-primary hover:text-primary/80 font-medium">Leer más →</a>
                     </div>
