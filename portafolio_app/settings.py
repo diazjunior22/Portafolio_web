@@ -17,7 +17,7 @@ import dj_database_url
 
 
 
-
+load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,10 +46,9 @@ ALLOWED_HOSTS = [
     ".railway.app",
 ]
 
-DB_LIVE = False
 
 # Application definition
-if DB_LIVE in ['False' , False]:
+if DEBUG in ['True' , True]:
     INSTALLED_APPS = [
         'django.contrib.admin',
         'django.contrib.auth',
@@ -79,7 +78,7 @@ else:
 #this es cuando la base de datos esta en la nube o offine
 
 
-if DB_LIVE in ['False' , False]:
+if DEBUG in ['True' , True]:
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
         'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -130,7 +129,7 @@ WSGI_APPLICATION = 'portafolio_app.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 
-if DB_LIVE in ['False' , False]:
+if DEBUG in ['True' , True]:
     DATABASES = {
       'default': {
         'ENGINE': 'django.db.backends.sqlite3',
