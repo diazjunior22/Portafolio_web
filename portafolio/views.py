@@ -1,74 +1,44 @@
 from django.shortcuts import render , redirect
-
 from .models import Proyecto
-from django.http import HttpResponse
-
-from  .form   import ContactForm
-
-
-from django.core.mail import EmailMessage
-
 from blog.models import Post
 
 
-#784303315bfb2d606d4296bc75dd96c1
+from django.http import HttpResponse
+from  .form   import ContactForm
+
 
 from django.contrib import messages
-
-import  requests
-
-import os 
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail , Email
 from dotenv import load_dotenv
 
-
 load_dotenv()
-# Create your views here.
-
-
-# def enviar_correo(nombre, email, asunto, mensaje):
-#             EmailMessage(
-#                 subject = f'CONTACTO EMAILL {nombre}' ,
-#                 body = f'{mensaje} + {asunto}' ,
-#                 from_email='juniordiazpalacio9@gmail.com',
-#                 to = ['juniordiazpalacio9@gmail.com'],
-#                 cc = [],
-#                 reply_to=[email]
-                
-                
-#             ).send()
-
-
-import mailtrap as mt
-
-client = mt.MailtrapClient(token=os.getenv("MAILTRAP_API_KEY"))
-
 def enviar_correo(nombre, email, asunto, mensaje):
-    token = "d645d0fae3fca7ab6351e54d83591802"
+    api_key = os.environ.get("SENDGRID_API_KEY")
+    sender_email = os.environ.get("EMAIL_SENDER")
+    receiver_email = os.environ.get("EMAIL_RECEIVER")
+    
+    subject = f"Contacto web: {nombre} - {asunto}"
+    body = f"{mensaje}\n\nDe: {nombre} <{email}>"
 
-    # payload = {
-    #     "from": {"email": "hello@demomailtrap.com", "name": nombre},
-    #     "to": [{"email": "juniordiazpalacio9@gmail.com"}],
-    #     "reply_to": [{"email": email}],
-    #     "subject": f"CONTACTO EMAIL {nombre} - {asunto}",
-    #     "text": mensaje,
-    #     "category": "Formulario Web"
-    # }# Pon aquí tu API Token de Mailtrap (Email Sending > API Tokens)
-
-    # headers = {
-    #         "Authorization": f"Bearer {token}",
-    #         "Content-Type": "application/json"
-    # }
-    # response = requests.post( url, headers=headers, json=payload)
-
-    mail = mt.Mail(
-        sender=mt.Address(email="juniordiazpalacio9@gmail.com", name=nombre),  
-        to=[mt.Address(email="juniordiazpalacio9@gmail.com")],          
-        subject=f"CONTACTO EMAIL {nombre} - {asunto} Responder a: {email}",
-        text=f"De: {nombre} <{email}>\n\nMensaje:\n{mensaje}",
-        category="Formulario Web",
+    message = Mail(
+        from_email=sender_email,
+        to_emails=receiver_email,
+        subject= f"Correo de {nombre} - {subject} ",
+        html_content=f"<strong>{asunto}</strong> correo :{email}"
+    
     )
-    response = client.send(mail)
-    return response 
+    
+    message.reply_to = Email(email)
+
+    try:
+        sg = SendGridAPIClient(api_key)
+        response = sg.send(message)
+        return response.status_code == 202   # True si fue aceptado
+    except Exception as e:
+        print(f"Error enviando correo: {e}")
+        return False
 
 
 def home(request):
@@ -84,6 +54,7 @@ def home(request):
             mensaje = form.cleaned_data['mensaje']
             enviar_correo(nombre, email, asunto, mensaje)
             messages.success(request, "✅ Tu mensaje fue enviado con éxito. ¡Gracias por contactarme!")
+            print("eviado")
             return redirect('home')
         else:
                         messages.error(request, "❌ Ocurrió un error. Revisa los datos e inténtalo nuevamente.")

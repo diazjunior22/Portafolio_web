@@ -16,7 +16,8 @@ from   dotenv import load_dotenv
 import dj_database_url
 
 
-load_dotenv()
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -45,7 +46,7 @@ ALLOWED_HOSTS = [
     ".railway.app",
 ]
 
-DB_LIVE = os.getenv("DB_LIVE")
+DB_LIVE = False
 
 # Application definition
 if DB_LIVE in ['False' , False]:
@@ -244,6 +245,13 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')        # tu Gmail
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")  # contraseña de aplicación
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+
+
+
+
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"   # backend de django-sendgrid-v5
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")       # tu clave SG.xxxxx
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 #this  es para recarga aauutomatica de cambios
 #pip install django-browser-reload
