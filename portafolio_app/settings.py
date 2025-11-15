@@ -48,31 +48,18 @@ ALLOWED_HOSTS = [
 
 
 # Application definition
-if DEBUG in ['True' , True]:
-    INSTALLED_APPS = [
-        'django.contrib.admin',
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'django.contrib.staticfiles',
-        'blog',
-        'portafolio',
-        #this is para roadload la pagina 
-#        "django_browser_reload",
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'blog',
+    'portafolio',
 ]
-else:
-        INSTALLED_APPS = [
-        'django.contrib.admin',
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'django.contrib.staticfiles',
-        'blog',
-        'portafolio',
-        #this is para roadload la pagina 
-]
+
     
     
 #this es cuando la base de datos esta en la nube o offine
@@ -206,13 +193,12 @@ STATICFILES_DIRS = [
 
 ]
 
+
+
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-#pora el manejo de archivos
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

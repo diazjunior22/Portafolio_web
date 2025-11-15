@@ -1,7 +1,6 @@
 from django.db import models
-
 from django.utils import timezone
-
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
@@ -18,7 +17,7 @@ class Post(models.Model):
     titulo = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
     contenido  = models.TextField()
-    imagen = models.ImageField(upload_to='blog/', blank=True, null=True , default="posts/default.jpg")
+    imagen = CloudinaryField('image', folder='blog', blank=True, null=True)
     creado = models.DateTimeField(default=timezone.now)
     actualizado = models.DateTimeField(auto_now=True)
     publicado =  models.BooleanField(default=True)

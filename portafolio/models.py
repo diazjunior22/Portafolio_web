@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -7,7 +8,7 @@ from django.db import models
 class Proyecto(models.Model):
     titulo = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=250)
-    image = models.ImageField(upload_to='portafolio/images/')
+    image = CloudinaryField('image', folder='portafolio/images')
     url = models.URLField(blank=True)
 
     def __str__(self):
