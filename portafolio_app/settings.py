@@ -55,12 +55,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'cloudinary',
     'blog',
     'portafolio',
 ]
 
-    
+
     
 #this es cuando la base de datos esta en la nube o offine
 
