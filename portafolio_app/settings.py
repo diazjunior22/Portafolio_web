@@ -181,8 +181,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 #solo para  compartir mi pagina a otra persona
 CSRF_TRUSTED_ORIGINS = [
-        "https://*.ngrok-free.app"
-        
+        "https://*.ngrok-free.app",
+        'https://jx-web.up.railway.app/',
         "https://*.railway.app",
 
 
