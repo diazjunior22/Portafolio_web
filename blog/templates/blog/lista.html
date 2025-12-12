@@ -2,24 +2,20 @@
 
 {% block content %}
 
-<header class="bg-gray-900 text-white py-40 ">
+<header class="bg-gray-900 text-white py-40  header-img ">
   <div class="max-w-4xl mx-auto px-4 text-center">
-    <h1 class="text-4xl font-extrabold mb-4">📰 BLOG JX</h1>
-    <p class="text-lg text-gray-300 mb-6">Encuentra mis últimos artículos y tutoriales.</p>
-
-<form method="GET" action="{% url 'search' %}" class="flex justify-center">
+    <h1 class="text-4xl   font-extrabold mb-4">📰 BLOG <span class='text-red-900'>JX</span></h1>
+    <p class="text-lg text-black  font-bold shadow-md text-shadow-md  mb-6">Encuentra mis últimos artículos y tutoriales.</p>
+    <form method="GET" action="{% url 'search' %}" class="flex justify-center">
       <input type="text" name="q" placeholder="Buscar un post..." value='{{ query }}'
              class="w-1/2 px-4 py-2 rounded-l-lg text-gray-900 focus:outline-none" >
-      <button type="submit" class="bg-black  px-4 py-2 rounded-r-lg hover:bg-indigo-600 transition">
+      <button type="submit" class="bg-black  text-white  px-4 py-2 rounded-r-lg hover:bg-indigo-600 transition">
         Buscar
       </button>
     </form>
   </div>
+
 </header>
-
-
-
-
 
 <section id="blog" class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
   <div class="max-w-6xl mx-auto">
@@ -35,13 +31,13 @@
         {% endif %}
         <div class="p-6">
           <h3 class="text-xl font-semibold text-black mb-2">{{ post.titulo }}</h3>
+          <p class="text-sm  font-sans text-black mb-2">{{ post.descripcion  }}</p>
           <p class="text-gray-400 text-sm mb-4">
-            {{ post.created_at|date:"d M Y" }}
+            {{ post.creado|date:"d M Y" }}
           </p>
-          <p class="text-muted-foreground mb-6">
-            {{ i.contenido|truncatewords:25|safe }}
 
-          </p>
+
+    </form>
           <a href="{% url 'detallePost' post.id %}"
              class="border border-border px-4 py-2 rounded-lg font-medium hover:bg-muted transition-colors text-white bg-black">
             Leer más

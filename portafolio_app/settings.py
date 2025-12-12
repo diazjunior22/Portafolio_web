@@ -41,9 +41,10 @@ DEBUG = os.getenv('DEBUG')
 
 #'.ngrok-free.app'
 ALLOWED_HOSTS = [
-        "localhost",
+    "localhost",
     "127.0.0.1",
     ".railway.app",
+    '.ngrok-free.app'
 ]
 
 
@@ -57,12 +58,28 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'blog',
+    'usuario',
     'portafolio',
+    'django_ckeditor_5',
+
 ]
 
 
-    
-#this es cuando la base de datos esta en la nube o offine
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_5_CUSTOM_CSS = 'static/css/custom_ckeditor.css'  # opcional
+
+
+
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': {
+            'items': ['heading', '|', 'bold', 'italic', 'link',
+                      'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
+                    }
+
+    },
+
+}
 
 
 if DEBUG in ['True' , True]:
@@ -111,7 +128,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'portafolio_app.wsgi.application'
-
+AUTH_USER_MODEL =  'usuario.CustomUser'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
@@ -164,7 +181,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 #solo para  compartir mi pagina a otra persona
 CSRF_TRUSTED_ORIGINS = [
-        #"https://*.ngrok-free.app"
+        "https://*.ngrok-free.app"
         
         "https://*.railway.app",
 
@@ -175,7 +192,7 @@ CSRF_TRUSTED_ORIGINS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 

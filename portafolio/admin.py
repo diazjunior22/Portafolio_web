@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Proyecto
+from .models import Proyecto , Mensaje , Cliente
 
 from django.utils.html import format_html
 
@@ -34,7 +34,30 @@ class ProyectoAdmin(admin.ModelAdmin):
         return "No Image"
     image_tag.short_description = 'Image Preview'
         
+
+class  MensajeAdmin(admin.ModelAdmin):
+    # columnas que aparecen en la lista
+    list_display = ("id", "asunto", "mensaje" ,'cliente__email', 'cliente_nombre' )
+
+    def cliente_email(self, obj):
+        return obj.cliente.email
+    cliente_email.short_description = 'Email'
+    def cliente_nombre(self, obj):
+        return obj.cliente.email
+    cliente_nombre.short_description = 'Nombre'
+    list_display_links = ("cliente__email",)
     
+    list_filter = ()  
+
+    
+class  ClienteAdmin(admin.ModelAdmin):
+    # columnas que aparecen en la lista
+    list_display = ('nombre' , 'email')
+
+
+admin.site.register(Mensaje,MensajeAdmin)
+admin.site.register(Cliente,ClienteAdmin)
+
     
 admin.site.register(Proyecto , ProyectoAdmin )
 # Register your models here.

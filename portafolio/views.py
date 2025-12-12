@@ -8,37 +8,14 @@ from  .form   import ContactForm
 
 
 from django.contrib import messages
-import os
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail , Email
 from dotenv import load_dotenv
 
-load_dotenv()
-def enviar_correo(nombre, email, asunto, mensaje):
-    api_key = os.environ.get("SENDGRID_API_KEY")
-    sender_email = os.environ.get("EMAIL_SENDER")
-    receiver_email = os.environ.get("EMAIL_RECEIVER")
-    
-    subject = f"Contacto web: {nombre} - {asunto}"
-    body = f"{mensaje}\n\nDe: {nombre} <{email}>"
+import os 
 
-    message = Mail(
-        from_email=sender_email,
-        to_emails=receiver_email,
-        subject= f"Correo de {nombre} - {subject} ",
-        html_content=f"<strong>{asunto}</strong> correo :{email}"
-    
-    )
-    
-    message.reply_to = Email(email)
 
-    try:
-        sg = SendGridAPIClient(api_key)
-        response = sg.send(message)
-        return response.status_code == 202   # True si fue aceptado
-    except Exception as e:
-        print(f"Error enviando correo: {e}")
-        return False
+
+from .models import Cliente, Mensaje
+
 
 
 def home(request):
@@ -51,8 +28,15 @@ def home(request):
             nombre = form.cleaned_data['nombre']
             email = form.cleaned_data['email']
             asunto = form.cleaned_data['asunto']
-            mensaje = form.cleaned_data['mensaje']
-            enviar_correo(nombre, email, asunto, mensaje)
+            contenido = form.cleaned_data['mensaje']
+            cliente, creado = Cliente.objects.get_or_create(email=email, defaults={'nombre': nombre})
+
+            # Crear mensaje asociado al cliente
+            Mensaje.objects.create(
+                cliente=cliente,
+                asunto=asunto,
+                mensaje=contenido
+            )
             messages.success(request, "✅ Tu mensaje fue enviado con éxito. ¡Gracias por contactarme!")
             print("eviado")
             return redirect('home')

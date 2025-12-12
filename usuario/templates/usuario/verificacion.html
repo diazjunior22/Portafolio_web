@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Cuenta</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f4f7fa;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f4f7fa; padding: 20px 0;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden; max-width: 100%;">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); padding: 40px 20px; text-align: center;">
+                            <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">¡Bienvenido!</h1>
+                            <p style="color: #cccccc; margin: 10px 0 0 0; font-size: 16px;">Verifica tu cuenta para continuar</p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Body -->
+                    <tr>
+                        <td style="padding: 40px 30px;">
+                            <h2 style="color: #333333; font-size: 22px; margin: 0 0 20px 0; font-weight: 600;">Hola {{user.username}},</h2>
+                            
+                            <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+                                Gracias por registrarte. Estamos emocionados de tenerte con nosotros. Para completar tu registro y activar tu cuenta, necesitamos verificar tu dirección de correo electrónico.
+                            </p>
+                            
+                            <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
+                                Por favor, haz clic en el botón de abajo para activar tu cuenta:
+                            </p>
+                            
+                            <!-- Button -->
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center" style="padding: 10px 0 30px 0;">
+                                        <a href="http://{{domain}}{% url 'activate' uidb64=uid token=token %}" 
+                                           style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #2d2d2d 0%, #000000 100%); color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 16px; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); transition: transform 0.2s; border: 1px solid #404040;">
+                                            Activar mi cuenta
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Alternative Link -->
+                            <div style="background-color: #f8f9fa; border-left: 4px solid #000000; padding: 15px; margin: 20px 0; border-radius: 4px;">
+                                <p style="color: #666666; font-size: 14px; margin: 0 0 10px 0; font-weight: 600;">
+                                    ¿No funciona el botón?
+                                </p>
+                                <p style="color: #666666; font-size: 13px; margin: 0; line-height: 1.5;">
+                                    Copia y pega este enlace en tu navegador:<br>
+                                    <a href="http://{{domain}}{% url 'activate' uidb64=uid token=token %}" 
+                                       style="color: #000000; word-break: break-all; text-decoration: none;">
+                                        http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+                                    </a>
+                                </p>
+                            </div>
+                            
+                            <!-- Security Notice -->
+                            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                                <p style="color: #888888; font-size: 14px; line-height: 1.5; margin: 0;">
+                                    <strong style="color: #666666;">Nota de seguridad:</strong> Este enlace de verificación expirará en 24 horas por razones de seguridad.
+                                </p>
+                                <p style="color: #888888; font-size: 14px; line-height: 1.5; margin: 10px 0 0 0;">
+                                    Si no creaste una cuenta con nosotros, puedes ignorar este correo de forma segura.
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #e0e0e0;">
+                            <p style="color: #888888; font-size: 14px; margin: 0 0 10px 0;">
+                                ¿Tienes preguntas? Contáctanos en 
+                                <a href="mailto:soporte@tudominio.com" style="color: #667eea; text-decoration: none;">soporte@tudominio.com</a>
+                            </p>
+                            <p style="color: #aaaaaa; font-size: 12px; margin: 10px 0 0 0;">
+                                © 2024 Tu Empresa. Todos los derechos reservados.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

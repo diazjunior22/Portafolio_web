@@ -47,9 +47,9 @@
             </div>
             
             <div class="flex justify-center md:justify-end">
-                <img src="{% static 'img/espacio5.jpg' %}"
+                <img src="{% static 'img/codigo.webp' %}"
                      alt="Espacio de trabajo"
-                     class="w-full max-w-sm md:max-w-none md:w-auto h-auto rounded-lg shadow-lg">
+                     class="w-[120]  md:max-w-none md:w-[400px] md:h-[400px]      h-auto  rounded-lg shadow-lg">
             </div>
         </div>
         <div class="mt-16">
@@ -144,7 +144,7 @@
                             </a>
                         </h3>
                         <p class="text-muted-foreground mb-4 leading-relaxed">
-                            {{ i.contenido|truncatewords:25|safe }}
+                            {{ i.descripcion|truncatewords:25|safe }}
 
                         </p>
                         <a href="{% url 'detallePost' i.id %}" class="text-primary hover:text-primary/80 font-medium">Leer más →</a>

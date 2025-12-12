@@ -1,63 +1,87 @@
 <!-- Navigation -->
+{% load static %}
+
+
 <nav class="fixed top-0 w-full bg-black text-white border-b border-gray-700 z-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
+            
             <!-- Logo -->
             <div class="font-heading font-bold text-xl text-white">
                 {% if request.resolver_match.url_name == 'listaPost' or request.resolver_match.url_name == 'detallePost' %}
-                    JX BLOG
+                    <a href="{% url 'listaPost' %}">JX BLOG</a>
                 {% else %}
                     JX PORTAFOLIO
                 {% endif %}
             </div>
 
             <!-- Links escritorio -->
-            <div class="hidden md:flex space-x-8">
-                <a href="{% url 'home' %}#incio" class="hover:text-gray-300 transition-colors">Inicio</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="{% url 'home' %}#inicio" class="hover:text-gray-300 transition-colors">Inicio</a>
                 <a href="{% url 'home' %}#sobre-mi" class="hover:text-gray-300 transition-colors">Sobre Mí</a>
                 <a href="{% url 'home' %}#portafolio" class="hover:text-gray-300 transition-colors">Portafolio</a>
                 <a href="{% url 'listaPost' %}" class="hover:text-gray-300 transition-colors">Blog</a>
                 <a href="{% url 'home' %}#contacto" class="hover:text-gray-300 transition-colors">Contacto</a>
+
+                {% if user.is_authenticated %}
+                <!-- USER DROPDOWN -->
+                <div class="relative group">
+                    <button class="flex items-center space-x-2 cursor-pointer">
+                        <img src="{% static 'img/person.svg' %}" class="w-7 h-7 rounded-full">
+                    </button>
+
+                    <!-- Dropdown -->
+                    <div class="absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                        {% comment %} <a href="{% url 'perfil' %}" class="block px-4 py-2 hover:bg-gray-200">Mi Perfil</a> {% endcomment %}
+                        <a href="{% url 'logout' %}" class="block px-4 py-2 hover:bg-red-200 text-red-600">Cerrar sesión</a>
+                    </div>
+                </div>
+
+                {% else %}
+                <!-- Botón destacado login -->
+                <a href="{% url 'login' %}" class="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 font-medium">
+                    Iniciar sesión
+                </a>
+                {% endif %}
             </div>
 
             <!-- Botón móvil -->
-                  <!-- Botón móvil -->
-      <button id="menu-btn" class="md:hidden p-2 text-white">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
- 
+            <button id="menu-btn" class="md:hidden p-2 text-white">
+                <svg id="icon-menu" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                          d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
 
         </div>
     </div>
 
-  <div id="menu" class="hidden md:hidden bg-black border-t border-gray-700">
-    <div class="flex flex-col space-y-2 px-4 py-4">
-      <a href="{% url 'home' %}#inicio" class="hover:text-gray-300">Inicio</a>
-      <a href="{% url 'home' %}#sobre-mi" class="hover:text-gray-300">Sobre Mí</a>
-      <a href="{% url 'home' %}#portafolio" class="hover:text-gray-300">Portafolio</a>
-      <a href="{% url 'listaPost' %}" class="hover:text-gray-300">Blog</a>
-      <a href="{% url 'home' %}#contacto" class="hover:text-gray-300">Contacto</a>
+    <!-- Menú móvil -->
+    <div id="menu" class="hidden md:hidden bg-black border-t border-gray-700">
+        <div class="flex flex-col space-y-2 px-4 py-4">
+            <a href="{% url 'home' %}#inicio" class="hover:text-gray-300">Inicio</a>
+            <a href="{% url 'home' %}#sobre-mi" class="hover:text-gray-300">Sobre Mí</a>
+            <a href="{% url 'home' %}#portafolio" class="hover:text-gray-300">Portafolio</a>
+            <a href="{% url 'listaPost' %}" class="hover:text-gray-300">Blog</a>
+            <a href="{% url 'home' %}#contacto" class="hover:text-gray-300">Contacto</a>
+
+            {% if user.is_authenticated %}
+                {% comment %} <a href="{% url 'perfil' %}" class="hover:text-gray-300">Mi Perfil</a> {% endcomment %}
+                <a href="{% url 'logout' %}" class="hover:text-red-400">Cerrar sesión</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="bg-white text-black px-4 py-2 rounded-lg font-medium">
+                    Iniciar sesión
+                </a>
+                <a href="{% url 'register' %}" class="hover:text-gray-300">Registro</a>
+            {% endif %}
+        </div>
     </div>
-  </div>
 </nav>
 
 
-</nav>
-
-
-<!-- Script para abrir/cerrar menú -->
-
-{% block scripts %}
 <script>
-  const btn = document.getElementById("menu-btn");
-  const menu = document.getElementById("menu");
-
-  btn.addEventListener("click", () => {
-    menu.classList.toggle("hidden");
-  });
+    // menú móvil
+    document.getElementById("menu-btn").addEventListener("click", () => {
+        document.getElementById("menu").classList.toggle("hidden");
+    });
 </script>
-
-{% endblock %}
