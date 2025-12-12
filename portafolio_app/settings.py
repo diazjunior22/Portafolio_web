@@ -251,9 +251,9 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 
-EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"   # backend de django-sendgrid-v5
-SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")       # tu clave SG.xxxxx
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"   # backend de django-sendgrid-v5
+# SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")       # tu clave SG.xxxxx
+# DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 #this  es para recarga aauutomatica de cambios
 #pip install django-browser-reload

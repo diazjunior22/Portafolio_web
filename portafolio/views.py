@@ -3,14 +3,10 @@ from .models import Proyecto
 from blog.models import Post
 
 
-from django.http import HttpResponse
 from  .form   import ContactForm
 
 
 from django.contrib import messages
-from dotenv import load_dotenv
-
-import os 
 
 
 

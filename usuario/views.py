@@ -15,8 +15,6 @@ from django.contrib.auth.tokens import default_token_generator
 
 #correo
 import os 
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail , Email
 from dotenv import load_dotenv
 load_dotenv()
 
