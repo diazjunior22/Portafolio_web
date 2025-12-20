@@ -9,6 +9,7 @@ class PostsAdmin(admin.ModelAdmin):
     fields = [
         "titulo",
         "slug",
+        'descripcion',
         "imagen",      # 👈 lo movemos arriba
         "contenido",
         "categoria",
