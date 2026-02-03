@@ -1,0 +1,54 @@
+/* Minimal Theme & Gap Scroll Support */
+:root {
+  --bg: #f7f7f7;
+  --fg: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --gap-size: 96px; /* default gap between sections */
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Work Sans', 'Open Sans', system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+a { color: #1e40af; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  scroll-margin-top: var(--gap-size);
+}
+
+section + section {
+  margin-top: var(--gap-size);
+}
+
+.bg-card, .card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.04);
+}
+
+.shadow-lg {
+  box-shadow: 0 6px 14px rgba(0,0,0,.08) !important;
+}
+
+.font-heading { font-family: 'Work Sans', sans-serif; }
+.font-body { font-family: 'Open Sans', sans-serif; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Gap visual subtle cue (optional) */
+.section-gap { transition: transform .3s ease; }
+.section-gap.gap-in-view { transform: translateY(0); }
+
+/* End of minimal theme */

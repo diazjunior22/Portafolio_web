@@ -1,0 +1,43 @@
+Resumen del Proyecto Portafolio Web
+===============================
+
+Descripción general
+- Portafolio personal de Junior Díaz Palacio (desarrollador backend) desarrollado con Django. Incluye secciones de inicio (portafolio), blog y contacto para presentar habilidades y proyectos.
+- En desarrollo se combinan vistas de portafolio, entradas de blog y un formulario de contacto; se apoya en un editor de contenidos (CKEditor 5) y en imágenes/multimedia gestionadas con Cloudinary.
+
+Tecnologías y stack
+- Backend: Python, Django (versión indicada en el código como Django 5.x), Django CKEditor 5, Django REST Framework (si aplica), Django WhiteNoise para assets estáticos.
+- Almacenamiento de medios: Cloudinary.
+- Base de datos: SQLite para desarrollo; configuración para producción mediante dj_database_url (con variables de entorno).
+- Frontend: plantillas Django con TailwindCSS-like clases y HTML/CSS estático.
+- Despliegue/operativa: WhiteNoise para estáticos, Procfile (Heroku/ despliegue similar), configuración de dominios y orígenes permitidos (ALLOWED_HOSTS, CSRF_TRUSTED_ORIGINS).
+- Entorno y dependencias: archivo requirements.txt; manejo de variables de entorno con dotenv.
+
+Estructura del proyecto
+- Apps principales: blog (gestión de posts y admin), portafolio (proyectos), usuario (usuario personalizado), portafolio_app (configuración del proyecto).
+- Plantillas y assets: `portafolio/templates/portafolio/inicio.html`, `templates/home.html` y recursos estáticos en `static/`.
+- Archivos clave: `manage.py`, `requirements.txt`, `Procfile`, `.env`, `db.sqlite3` (base de datos local).
+- Notas visuales: admin personalizado en `blog/admin.py` con vista previa de imágenes; plantilla de inicio que muestra secciones de portafolio, blog y contacto.
+
+Funcionalidades principales
+- Portafolio: visualización de proyectos en rejilla; cada elemento muestra imagen, título y descripción; enlaces a proyectos externos.
+- Blog: listado de posts y detalle; enlaces para ver todos los posts cuando hay más contenido.
+- Página de inicio: secciones de presentacion, habilidades técnicas y formulario de contacto; descarga de CV desde recursos estáticos.
+- Autenticación: se discute entre usar LoginView vs vistas personalizadas; se propone un enfoque híbrido que mantiene control sin sacrificar seguridad (ver `comparativa_vistas_login.txt`).
+- Contacto: formulario de contacto con validación y mensajes de estado.
+
+Configuración y despliegue
+- Configuración general en `portafolio_app/settings.py` con manejo de DEBUG desde variables de entorno y URLs permitidas para Railway/ngrok.
+- Base de datos cambia entre SQLite (desarrollo) y producción mediante `dj_database_url` y `DATABASE_URL`.
+- Archivos estáticos y de medios: `STATIC_ROOT`, `STATICFILES_DIRS`, `STATIC_URL`, `CKEditor` y `Cloudinary` para manejo de contenidos.
+- Seguridad y correo: settings de correo con Gmail SMTP (valores tomados de entorno en variables); `CSRF_TRUSTED_ORIGINS` para orígenes seguros.
+
+Notas y consideraciones
+- El repositorio contiene `db.sqlite3` y `.env` en raíz; se recomienda no versionar secretos y añadir `.env` al `.gitignore`.
+- El último commit visible menciona: "quite logo y agregue descripcion en el admin".
+- Para desplegar, usa `Procfile` y adapta variables de entorno; revisa `requirements.txt` para dependencias.
+
+Próximos pasos (opcionales)
+- Ejecutar localmente: `python manage.py migrate` y `python manage.py runserver`.
+- Instalar dependencias: `pip install -r requirements.txt`.
+- Si deseas, puedo añadir un README con instrucciones de uso y un índice de componentes.
