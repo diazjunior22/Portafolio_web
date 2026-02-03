@@ -1,1 +1,4 @@
-This is a placeholder to describe patch steps.
+Admin and seed plan:
+- Add admin registrations for Proyectos, Cliente, Mensaje, and Post/Comentario as described.
+- Add a Django management command to seed posts and projects with sample data.
+- Provide a README snippet with commands to run migrations, seed, and verify UI.
