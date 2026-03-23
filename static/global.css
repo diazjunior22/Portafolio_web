@@ -1,54 +1,203 @@
-/* Minimal Theme & Gap Scroll Support */
-:root {
-  --bg: #f7f7f7;
-  --fg: #1f2937;
-  --muted: #6b7280;
-  --card: #ffffff;
-  --gap-size: 96px; /* default gap between sections */
+/* ============================================================
+   GLOBAL THEME — Neon Nebula (Google Stitch Design System)
+   ============================================================ */
+
+/* ─── Reset ─────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-
+html,
 body {
+  height: 100%;
   margin: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: -apple-system, BlinkMacSystemFont, 'Work Sans', 'Open Sans', system-ui, sans-serif;
-  line-height: 1.6;
+  padding: 0;
 }
 
-a { color: #1e40af; text-decoration: none; }
-a:hover { text-decoration: underline; }
+/* ─── Base ───────────────────────────────────────────────────── */
+body {
+  background: #0a0a12;
+  color: #e8e8f0;
+  font-family: 'Inter', 'Open Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
 
+/* ─── Typography ─────────────────────────────────────────────── */
+.font-heading {
+  font-family: 'Work Sans', sans-serif;
+}
+
+.font-body {
+  font-family: 'Inter', 'Open Sans', sans-serif;
+}
+
+/* ─── Links ──────────────────────────────────────────────────── */
+a {
+  color: #60a5fa;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #60a5fa;
+}
+
+/* ─── Images ─────────────────────────────────────────────────── */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ─── Sections: NO margin-top forzado ───────────────────────── */
 section {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-  scroll-margin-top: var(--gap-size);
+  scroll-margin-top: 80px;
+  /* para que los anchor links no queden bajo el nav fijo */
 }
 
-section + section {
-  margin-top: var(--gap-size);
+/* ─── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
 }
 
-.bg-card, .card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 1px 6px rgba(0,0,0,.04);
+::-webkit-scrollbar-track {
+  background: #0a0a12;
 }
 
-.shadow-lg {
-  box-shadow: 0 6px 14px rgba(0,0,0,.08) !important;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
+  border-radius: 3px;
 }
 
-.font-heading { font-family: 'Work Sans', sans-serif; }
-.font-body { font-family: 'Open Sans', sans-serif; }
+::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+}
 
-img { max-width: 100%; height: auto; display: block; }
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection {
+  background: rgba(37, 99, 235, 0.4);
+  color: #fff;
+}
 
-/* Gap visual subtle cue (optional) */
-.section-gap { transition: transform .3s ease; }
-.section-gap.gap-in-view { transform: translateY(0); }
+/* ─── Focus ──────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
 
-/* End of minimal theme */
+/* ─── Tailwind / legacy compat tokens ───────────────────────── */
+:root {
+  /* Backgrounds */
+  --nn-bg: #0a0a12;
+  --nn-low: #12121e;
+  --nn-card: #1a1a28;
+  --nn-card-hi: #222236;
+  --nn-border: rgba(255, 255, 255, 0.07);
+
+  /* Blue-Purple Palette */
+  --nn-blue: #3b82f6;
+  --nn-blue-deep: #1d4ed8;
+  --nn-blue-light: #60a5fa;
+  --nn-purple: #2563eb;
+  --nn-purple-light: #60a5fa;
+  --nn-purple-deep: #1d4ed8;
+
+  /* Text */
+  --nn-txt: #e8e8f0;
+  --nn-muted: #9292a8;
+
+  /* Legacy compat */
+  --background: #0a0a12;
+  --foreground: #e8e8f0;
+  --primary: #3b82f6;
+  --primary-cont: #2563eb;
+  --muted-fg: #9292a8;
+  --card: #1a1a28;
+  --border: rgba(255, 255, 255, .07);
+  --gap-size: 80px;
+}
+
+.bg-background {
+  background-color: var(--background) !important;
+}
+
+.text-foreground {
+  color: var(--foreground) !important;
+}
+
+.text-muted-foreground {
+  color: var(--muted-fg) !important;
+}
+
+.bg-card {
+  background-color: var(--card) !important;
+}
+
+.border-border {
+  border-color: var(--border) !important;
+}
+
+.bg-primary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+}
+
+.text-primary {
+  color: #60a5fa !important;
+}
+
+.text-primary-foreground {
+  color: #fff !important;
+}
+
+/* Magic UI Animations & Effects */
+@keyframes border-beam {
+    100% { offset-distance: 100%; }
+}
+
+.border-beam-container {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    border: 1.5px solid transparent;
+    border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    z-index: 10;
+}
+
+.border-beam {
+    position: absolute;
+    aspect-ratio: 1;
+    width: 150px;
+    background: linear-gradient(to left, var(--nn-primary), var(--nn-accent), transparent);
+    offset-path: rect(0 auto auto 0 round 150px);
+    animation: border-beam 8s linear infinite;
+}
+
+.magic-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.magic-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        250px circle at var(--mouse-x, -250px) var(--mouse-y, -250px),
+        rgba(108, 143, 255, 0.1),
+        transparent 100%
+    );
+    z-index: 5;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.magic-card:hover::before {
+    opacity: 1;
+}

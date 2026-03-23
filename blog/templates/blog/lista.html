@@ -1,68 +1,192 @@
 {% extends "home.html" %}
-
 {% block content %}
 
-<header class="bg-gray-900 text-white py-40  header-img ">
-  <div class="max-w-4xl mx-auto px-4 text-center">
-    <h1 class="text-4xl   font-extrabold mb-4">📰 BLOG <span class='text-red-900'>JX</span></h1>
-    <p class="text-lg text-black  font-bold shadow-md text-shadow-md  mb-6">Encuentra mis últimos artículos y tutoriales.</p>
-    <form method="GET" action="{% url 'search' %}" class="flex justify-center">
-      <input type="text" name="q" placeholder="Buscar un post..." value='{{ query }}'
-             class="w-1/2 px-4 py-2 rounded-l-lg text-gray-900 focus:outline-none" >
-      <button type="submit" class="bg-black  text-white  px-4 py-2 rounded-r-lg hover:bg-indigo-600 transition">
+<style>
+/* Reutiliza los tokens de Neon Nebula ya cargados en home.html */
+.bl-hero {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(108,143,255,.16) 0%, transparent 65%),
+    radial-gradient(circle, rgba(108,143,255,.055) 1px, transparent 1px) 0 0 / 28px 28px,
+    #0f0f14;
+  padding-top: 7rem;
+  padding-bottom: 3.5rem;
+}
+.bl-card {
+  background: #22222c;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform .3s, box-shadow .3s;
+  position: relative;
+}
+.bl-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 48px rgba(96,165,250,.14), 0 20px 40px rgba(0,0,0,.35);
+}
+.bl-card-accent {
+  position: absolute; bottom:0; left:0; right:0; height:3px;
+  background: linear-gradient(90deg,#4d6fff,#93c5fd);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .38s ease;
+}
+.bl-card:hover .bl-card-accent { transform: scaleX(1); }
+
+.bl-badge {
+  display:inline-flex; align-items:center; gap:.35rem;
+  background: rgba(108,143,255,.12);
+  border: 1px solid rgba(108,143,255,.28);
+  color: #6c8fff;
+  font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  padding:.2rem .65rem; border-radius:9999px;
+}
+
+.bl-grad {
+  background: linear-gradient(135deg,#6c8fff 0%,#93c5fd 60%,#4d6fff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.bl-search {
+  display:flex; max-width:560px; margin:0 auto;
+  background:rgba(34,34,44,.7); border:1px solid rgba(255,255,255,.1);
+  border-radius:9999px; overflow:hidden; backdrop-filter:blur(12px);
+}
+.bl-search input {
+  flex:1; background:transparent!important; border:none!important;
+  padding:.8rem 1.2rem!important; color:#e8e8f0!important;
+  font-size:.92rem!important; outline:none!important;
+  border-radius:0!important; box-shadow:none!important;
+}
+.bl-search input::placeholder { color:#9292a8; }
+.bl-search button {
+  background:linear-gradient(135deg,#4d6fff,#6c8fff);
+  color:#fff; border:none; padding:.8rem 1.5rem;
+  font-size:.88rem; font-weight:700; cursor:pointer;
+  border-radius:0 9999px 9999px 0;
+  transition:opacity .2s;
+}
+.bl-search button:hover { opacity:.88; }
+.bl-img-wrap { height:200px; overflow:hidden; background:#2a2a36; }
+.bl-img-wrap img { width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s; }
+.bl-card:hover .bl-img-wrap img { transform:scale(1.05); }
+</style>
+
+<!-- ── HERO ──────────────────────────────────────────────── -->
+<header class="bl-hero">
+  <div style="max-width:60rem;margin:0 auto;padding:0 1.5rem;text-align:center;">
+
+    <span class="bl-badge" style="margin-bottom:1.1rem;display:inline-flex;">📰 Blog</span>
+    <h1 style="font-family:'Work Sans',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:.9rem;">
+      BLOG <span class="bl-grad">JX</span>
+    </h1>
+    <p style="color:#9292a8;font-size:1.05rem;margin-bottom:2rem;">
+      Encuentra mis últimos artículos, reflexiones y tutoriales.
+    </p>
+
+    <form method="GET" action="{% url 'search' %}" class="bl-search">
+      <input type="text" name="q" placeholder="Buscar un artículo..." value="{{ query }}">
+      <button type="submit">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:.3rem;"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
         Buscar
       </button>
     </form>
-  </div>
 
+  </div>
 </header>
 
-<section id="blog" class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl md:text-5xl font-bold text-center text-white mb-12">
-      Últimos Posts
-    </h2>
+<!-- ── GRID DE POSTS ─────────────────────────────────────── -->
+<section style="background:#0f0f14;padding:4.5rem 0;">
+  <div style="max-width:72rem;margin:0 auto;padding:0 1.5rem;">
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% if query %}
+    <h2 style="font-family:'Work Sans',sans-serif;font-size:1.6rem;font-weight:800;color:#e8e8f0;text-align:center;margin-bottom:2.5rem;">
+      Resultados para: <span class="bl-grad">"{{ query }}"</span>
+    </h2>
+    {% else %}
+    <h2 style="font-family:'Work Sans',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;color:#e8e8f0;text-align:center;margin-bottom:2.5rem;letter-spacing:-.02em;">
+      Últimos <span class="bl-grad">Posts</span>
+    </h2>
+    {% endif %}
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;" class="posts-grid">
       {% for post in posts %}
-      <article class="border border-border rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition">
-        {% if post.imagen %}
-        <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" class="w-full h-48 object-cover">
-        {% endif %}
-        <div class="p-6">
-          <h3 class="text-xl font-semibold text-black mb-2">{{ post.titulo }}</h3>
-          <p class="text-sm  font-sans text-black mb-2">{{ post.descripcion  }}</p>
-          <p class="text-gray-400 text-sm mb-4">
-            {{ post.creado|date:"d M Y" }}
+
+      <article class="bl-card gsap-blog-card">
+        <!-- Imagen -->
+        <div class="bl-img-wrap">
+          {% if post.imagen %}
+          <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}">
+          {% else %}
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#9292a8;">📄</div>
+          {% endif %}
+        </div>
+
+        <!-- Contenido -->
+        <div style="padding:1.3rem 1.4rem;flex-grow:1;display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem;flex-wrap:wrap;">
+            <span class="bl-badge">{{ post.categoria.nombre|default:"Artículo" }}</span>
+            <span style="font-size:.75rem;color:#9292a8;">{{ post.creado|date:"d M Y" }}</span>
+          </div>
+
+          <h3 style="font-family:'Work Sans',sans-serif;font-size:1rem;font-weight:800;color:#e8e8f0;line-height:1.4;margin-bottom:.6rem;flex-grow:1;">
+            {{ post.titulo }}
+          </h3>
+
+          <p style="font-size:.83rem;color:#9292a8;line-height:1.65;margin-bottom:1.1rem;
+                     display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">
+            {{ post.descripcion }}
           </p>
 
-
-    </form>
           <a href="{% url 'detallePost' post.id %}"
-             class="border border-border px-4 py-2 rounded-lg font-medium hover:bg-muted transition-colors text-white bg-black">
+            style="display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.2rem;
+                   background:linear-gradient(135deg,#22222c,#2a2a36);
+                   border:1px solid rgba(108,143,255,.3);
+                   border-radius:9999px;font-size:.82rem;font-weight:700;
+                   color:#6c8fff;text-decoration:none;width:fit-content;
+                   transition:background .25s,box-shadow .25s,transform .2s;"
+            onmouseover="this.style.background='rgba(108,143,255,.15)';this.style.transform='translateY(-1px)'"
+            onmouseout="this.style.background='linear-gradient(135deg,#22222c,#2a2a36)';this.style.transform='none'">
             Leer más
+            <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
         </div>
+        <div class="bl-card-accent"></div>
       </article>
+
       {% empty %}
-      <p class="text-gray-400 text-center col-span-3">No hay posts publicados aún.</p>
+      <div style="grid-column:1/-1;text-align:center;padding:5rem 0;">
+        <p style="color:#9292a8;font-size:1rem;">
+          {% if query %}No se encontraron resultados para "<strong style="color:#e8e8f0;">{{ query }}</strong>".{% else %}No hay posts publicados aún.{% endif %}
+        </p>
+      </div>
       {% endfor %}
     </div>
+
   </div>
 </section>
 
-
-
-
-
-
+<style>
+@media(max-width:900px){.posts-grid{grid-template-columns:repeat(2,1fr)!important;}}
+@media(max-width:560px){.posts-grid{grid-template-columns:1fr!important;}}
+</style>
 
 {% endblock content %}
 
-
-
-
-
-
-
-
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  if(typeof gsap!=="undefined" && typeof ScrollTrigger!=="undefined"){
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from(".gsap-blog-card",{
+      scrollTrigger:{trigger:".gsap-blog-card",start:"top 85%"},
+      opacity:0,y:45,duration:.7,stagger:.13,ease:"power3.out"
+    });
+    gsap.from("header h1, header p, .bl-search",{
+      opacity:0,y:30,duration:.8,stagger:.15,delay:.1,ease:"power3.out"
+    });
+  }
+});
+</script>
+{% endblock %}

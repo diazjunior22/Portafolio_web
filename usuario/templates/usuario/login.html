@@ -1,81 +1,113 @@
 {% extends "home.html" %}
 
 {% block content %}
+<style>
+/* Applica estilos Neon Nebula a los inputs de Django del Formulario */
+section.auth-section form input {
+  width: 100% !important;
+  background: rgba(255,255,255,.05) !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  border-radius: .75rem !important;
+  padding: .75rem 1rem !important;
+  color: #e8e8f0 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: .95rem !important;
+  outline: none !important;
+  transition: border-color .2s, box-shadow .2s !important;
+}
+section.auth-section form input:focus {
+  border-color: rgba(59,130,246,.5) !important;      /* nn-blue */
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15) !important;
+}
+section.auth-section label {
+  display: block;
+  font-size: .75rem; 
+  font-weight: 700;
+  text-transform: uppercase; 
+  letter-spacing: .08em;
+  color: #9292a8; /* nn-muted */
+  margin-bottom: .45rem;
+  margin-top: 1.1rem;
+}
+</style>
 
-{% comment %} aqui muestra una vista diferente dependiendo si viene del registro o no  mensaje de verificacion{% endcomment %}
-<section class="flex items-center justify-center min-h-screen bg-gray-100">
+<section class="auth-section" style="min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; padding: 3rem 1.5rem; background: var(--nn-bg);">
+
 {% if request.GET.command == 'verification' %}
-  <div style="text-align: center; padding: 20px;">
-    <h2>¡Gracias por registrarte con nosotros!</h2>
-    <p>Te hemos enviado un correo electrónico de verificación a tu dirección:</p>
-    <p style="font-weight: bold; color: #007bff;">{{ request.GET.email }}</p>
-    <p style="margin-top: 20px;">
-      <strong>Si no encuentras el correo, por favor revisa tu carpeta de spam o correo no deseado.</strong>
-    </p>
-    <p style="margin-top: 30px;">
-      ¿Ya verificaste tu cuenta? <a href="{% url 'login' %}">Iniciar sesión</a>
-    </p>
-  </div>
-{% else %}
-
-{% comment %} aqui muestra el formulario de login normal {% endcomment %}
-    <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-        						{% include "includes/alert.html" %}
-
-        <div class="text-center">
-            <h2 class="text-2xl font-bold text-gray-900">Iniciar Sesión</h2>
-            <p class="mt-2 text-sm text-gray-600">Accede a tu cuenta para continuar</p>
-        </div>
-
-        <form method="post" action="{% url 'login' %}" class="space-y-6">
-            {% csrf_token %}
-
-            <div>
-                <!-- Renderizamos el label del campo 'username' desde el formulario de Django -->
-                <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-700">
-                    {{ form.username.label }}
-                </label>
-                <!-- Renderizamos el campo 'username' en sí. Las clases CSS se aplicaron en 'forms.py' -->
-                <div class="mt-1">
-                    {{ form.username }}
-                </div>
-            </div>
-
-            <div>
-                <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-700">
-                    {{ form.password.label }}
-                </label>
-                <div class="mt-1">
-                    {{ form.password }}
-                </div>
-            </div>
-            
-            <!-- Aquí es donde Django's AuthenticationForm muestra los errores generales,
-                 como "Por favor, introduce un nombre de usuario y contraseña correctos".
-                 Es crucial para dar feedback al usuario si las credenciales fallan. -->
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                <div class="p-3 text-sm text-red-800 bg-red-100 rounded-lg" role="alert">
-                    {{ error }}
-                </div>
-                {% endfor %}
-            {% endif %}
-
-            <div>
-                <button type="submit"
-                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black-500">
-                    Iniciar Sesión
-                </button>
-            </div>
-        </form>
-
-        <p class="text-center text-sm text-gray-600">
-            ¿Aún no tienes una cuenta?
-            <a href="{% url 'register' %}" class="font-medium text-indigo-600 hover:text-indigo-500">
-                Regístrate aquí
-            </a>
-        </p>
+  <!-- ESTADO: VERIFICACION -->
+  <div style="background: rgba(34,34,40,.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); border-radius: 1.25rem; padding: 3rem; text-align: center; max-width: 500px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,.4);">
+    <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(59,130,246,.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+      <svg width="26" height="26" fill="none" stroke="#3b82f6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
     </div>
+    
+    <h2 style="font-family: 'Work Sans', sans-serif; font-size: 1.65rem; font-weight: 800; color: #e8e8f0; margin-bottom: 1rem;">¡Revisa tu correo!</h2>
+    <p style="color: #9292a8; font-size: .95rem; line-height: 1.6; margin-bottom: 1.5rem;">Te hemos enviado un enlace de verificación a la dirección:</p>
+    
+    <div style="background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: .75rem; padding: .8rem; margin-bottom: 1.5rem;">
+      <p style="margin: 0; font-weight: 700; color: #60a5fa; letter-spacing: .03em;">{{ request.GET.email }}</p>
+    </div>
+    
+    <p style="font-size: .8rem; color: #9292a8; margin-bottom: 2rem;">Si no ves el mensaje en unos minutos, revisa tu carpeta de <strong>Spam</strong>.</p>
+    
+    <a href="{% url 'login' %}" style="display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: .8rem 1rem; background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: #fff; border-radius: 9999px; font-weight: 700; font-size: .9rem; text-decoration: none; transition: transform .2s, box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(59,130,246,.35)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+      Ya verifiqué mi cuenta
+    </a>
+  </div>
+
+{% else %}
+  <!-- ESTADO: LOGIN NORMAL -->
+  <div style="background: rgba(26,26,40,.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.07); border-radius: 1.25rem; padding: 2.5rem; max-width: 420px; width: 100%; box-shadow: 0 25px 50px -12px rgba(0,0,0,.5);">
+    
+    {% include "includes/alert.html" %}
+
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 1rem; background: linear-gradient(135deg, rgba(59,130,246,.2), rgba(139,92,246,.2)); color: #60a5fa; margin-bottom: 1.25rem; font-size: 1.2rem;">
+        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+      </span>
+      <h2 style="font-family: 'Work Sans', sans-serif; font-size: 1.7rem; font-weight: 800; color: #e8e8f0; margin-bottom: .4rem;">Iniciar Sesión</h2>
+      <p style="color: #9292a8; font-size: .9rem;">Ingresa tus credenciales para continuar</p>
+    </div>
+
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+
+      <div>
+        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+        {{ form.username }}
+      </div>
+
+      <div>
+        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+        {{ form.password }}
+      </div>
+      
+      {% if form.non_field_errors %}
+        <div style="margin-top: 1.5rem; padding: .85rem; background: rgba(239, 68, 68, .1); border: 1px solid rgba(239, 68, 68, .3); border-radius: .75rem; color: #fca5a5; font-size: .85rem; text-align: center;">
+          {% for error in form.non_field_errors %}
+            {{ error }}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div style="margin-top: 2.25rem;">
+        <button type="submit" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: .5rem; padding: .9rem 1rem; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: #fff; border: none; border-radius: 9999px; font-weight: 700; font-size: .95rem; cursor: pointer; transition: transform .2s, box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(59,130,246,.4)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+          Acceder al sistema
+          <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+      </div>
+    </form>
+
+    <div style="margin-top: 2.5rem; text-align: center; border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem;">
+      <p style="color: #9292a8; font-size: .9rem; margin: 0;">
+        ¿Aún no tienes una cuenta? <br>
+        <a href="{% url 'register' %}" style="display: inline-block; margin-top: .6rem; color: #60a5fa; font-weight: 600; text-decoration: none; transition: color .2s;" onmouseover="this.style.color='#a78bfa';" onmouseout="this.style.color='#60a5fa';">
+          Regístrate aquí
+        </a>
+      </p>
+    </div>
+
+  </div>
 {% endif %}
 </section>
+
 {% endblock content %}

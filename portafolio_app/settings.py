@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u3a-n$-=aobz-t1#vsse8w+wop0e56wzw-zyr23w$d74_e5!m*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = True
 
 
 
@@ -133,17 +133,25 @@ AUTH_USER_MODEL =  'usuario.CustomUser'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 
-if DEBUG in ['True' , True]:
-    DATABASES = {
-      'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
- }
-}
-else:
-    DATABASES = {
+# Forzar el uso de PostgreSQL en la nube (Railway) desde local
+# sin tener que configurar DEBUG=False
+
+db_url = os.getenv('DATABASE_URL', '')
+
+if 'railway.internal' in db_url:
+    raise RuntimeError(
+        "\n\n🚨 ¡Estás intentando usar una URL privada de Railway (.internal) desde tu computadora local! 🚨\n"
+        "Esta URL NO funciona fuera de los servidores de Railway.\n\n"
+        "Para solucionarlo:\n"
+        "  1. Ve a tu panel de Railway y abre tu base de datos.\n"
+        "  2. Ve a la pestaña 'Connect' o busca 'Public Network' (TCP Proxy).\n"
+        "  3. Asegúrate de habilitarlo y copia la nueva URL (termina en .net y comienza con postgresql://).\n"
+        "  4. Pégala en tu archivo .env en la variable DATABASE_URL y reinicia el servidor.\n"
+    )
+
+DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
+        default=db_url,
         conn_max_age=600,
         ssl_require=True
     )

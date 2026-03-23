@@ -1,45 +1,110 @@
 {% extends "home.html" %}
 
 {% block content %}
+<style>
+/* Applica estilos Neon Nebula a los inputs de Django del Formulario */
+section.auth-section form input {
+  width: 100% !important;
+  background: rgba(255,255,255,.05) !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  border-radius: .75rem !important;
+  padding: .75rem 1rem !important;
+  color: #e8e8f0 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: .95rem !important;
+  outline: none !important;
+  transition: border-color .2s, box-shadow .2s !important;
+}
+section.auth-section form input:focus {
+  border-color: rgba(59,130,246,.5) !important;      /* nn-blue */
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15) !important;
+}
+section.auth-section label {
+  display: block;
+  font-size: .75rem; 
+  font-weight: 700;
+  text-transform: uppercase; 
+  letter-spacing: .08em;
+  color: #9292a8; /* nn-muted */
+  margin-bottom: .45rem;
+  margin-top: 1.25rem;
+}
+/* Estilo de errores de formulario */
+ul.errorlist {
+  list-style: none; padding: 0; margin: .5rem 0 0;
+  color: #fca5a5; font-size: .8rem; font-weight: 600;
+}
+</style>
 
+<section class="auth-section" style="min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; padding: 4rem 1.5rem; background: var(--nn-bg);">
 
-
-
-
-<section class="flex items-center justify-center min-h-screen bg-gray-100 py-12">
-    <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-        <div class="text-center">
-            <h2 class="text-2xl font-bold text-gray-900">Crear una Cuenta</h2>
-            <p class="mt-2 text-sm text-gray-600">Únete para empezar a participar.</p>
-        </div>
-
-        <form method="post" class="space-y-4">
-            {% csrf_token %}
-                {{ form.errors }}
-                
-            <label for="{{ form.username.id_for_label }}">Usuario</label>
-            {{form.username}}
-            <label for="{{ form.email.id_for_label }}">Correo Electrónico</label>
-            {{form.email}}
-            <label for="{{ form.password1.id_for_label }}">Contraseña</label>
-            {{form.password1}}
-            <label for="{{ form.password2.id_for_label }}">Confirmar Contraseña</label>
-            {{form.password2}}
-
-            <div>
-                <button type="submit"
-                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black-500">
-                    Crear Cuenta
-                </button>
-            </div>
-        </form>
-
-        <p class="text-center text-sm text-gray-600">
-            ¿Ya tienes una cuenta?
-            <a href="{% url 'login' %}" class="font-medium text-indigo-600 hover:text-indigo-500">
-                Iniciar Sesión
-            </a>
-        </p>
+  <div style="background: rgba(26,26,40,.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.07); border-radius: 1.25rem; padding: 2.5rem; max-width: 440px; width: 100%; box-shadow: 0 25px 50px -12px rgba(0,0,0,.5);">
+    
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 1rem; background: linear-gradient(135deg, rgba(139,92,246,.2), rgba(59,130,246,.2)); color: #a78bfa; margin-bottom: 1.25rem; font-size: 1.2rem;">
+        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+      </span>
+      <h2 style="font-family: 'Work Sans', sans-serif; font-size: 1.7rem; font-weight: 800; color: #e8e8f0; margin-bottom: .4rem;">Crear Cuenta</h2>
+      <p style="color: #9292a8; font-size: .9rem;">Únete a Portafolio JX para empezar</p>
     </div>
+
+    <form method="post">
+      {% csrf_token %}
+      
+      {% if form.errors and not form.non_field_errors %}
+        <div style="margin-bottom: 1.5rem; padding: .85rem; background: rgba(239, 68, 68, .1); border: 1px solid rgba(239, 68, 68, .3); border-radius: .75rem; color: #fca5a5; font-size: .85rem; text-align: center;">
+          Por favor, corrige los errores debajo antes de continuar.
+        </div>
+      {% endif %}
+      
+      {% if form.non_field_errors %}
+        <div style="margin-bottom: 1.5rem; padding: .85rem; background: rgba(239, 68, 68, .1); border: 1px solid rgba(239, 68, 68, .3); border-radius: .75rem; color: #fca5a5; font-size: .85rem; text-align: center;">
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+
+      <div>
+        <label for="{{ form.username.id_for_label }}">Usuario</label>
+        {{ form.username }}
+        {{ form.username.errors }}
+      </div>
+
+      <div>
+        <label for="{{ form.email.id_for_label }}">Correo Electrónico</label>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+
+      <div>
+        <label for="{{ form.password1.id_for_label }}">Contraseña</label>
+        {{ form.password1 }}
+        {{ form.password1.errors }}
+      </div>
+
+      <div>
+        <label for="{{ form.password2.id_for_label }}">Confirmar Contraseña</label>
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+      </div>
+
+      <div style="margin-top: 2.25rem;">
+        <button type="submit" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: .5rem; padding: .9rem 1rem; background: linear-gradient(135deg, #8b5cf6, #3b82f6); color: #fff; border: none; border-radius: 9999px; font-weight: 700; font-size: .95rem; cursor: pointer; transition: transform .2s, box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(139,92,246,.35)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+          Crear mi cuenta
+          <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </button>
+      </div>
+    </form>
+
+    <div style="margin-top: 2.5rem; text-align: center; border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem;">
+      <p style="color: #9292a8; font-size: .9rem; margin: 0;">
+        ¿Ya tienes una cuenta? <br>
+        <a href="{% url 'login' %}" style="display: inline-block; margin-top: .6rem; color: #a78bfa; font-weight: 600; text-decoration: none; transition: color .2s;" onmouseover="this.style.color='#60a5fa';" onmouseout="this.style.color='#a78bfa';">
+          Inicia Sesión aquí
+        </a>
+      </p>
+    </div>
+
+  </div>
 </section>
+
 {% endblock content %}

@@ -1,53 +1,81 @@
 <!DOCTYPE html>
 {%  load static %}
 
-
-<html lang="es" class="h-full">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% if debug %}
-  <script src="{% static 'django_browser_reload/reload.js' %}"></script>
-  {% endif %}
+  <title>Portafolio Web JX</title>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Work+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="{% static 'ico/logo.ico' %}">
-  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'global.css' %}">    
+
+  <!-- Global CSS (Neon Nebula design system) -->
+  <link rel="stylesheet" href="{% static 'global.css' %}">
+
+  <!-- App JS -->
   <script src="{% static 'js/app.js' %}"></script>
-  <script src="{% static 'js/gap-scroll.js' %}"></script>
+
   <style>
-    .font-heading { font-family: 'Work Sans', sans-serif; }
-    .font-body { font-family: 'Open Sans', sans-serif; }
+    /* Base dark background always */
+    html, body { background: #0f0f14 !important; color: #e8e8f0 !important; }
+
+    /* CKEditor adjustments */
     .ck-editor__editable { min-height: 80px !important; max-height: 120px !important; }
     .ck-word-count { display: none !important; }
-    .header-img { background-image: url('/static/img/banner.png'); background-color: rgba(0,0,0,.5); background-size: cover; background-position: center; }
+
+    /* Blog/legacy header banner */
+    .header-img {
+      background-image: linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)), url('/static/img/banner.png');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Alert messages dark style */
+    .alert-success { background:#14532d!important; color:#86efac!important; border:1px solid #166534!important; }
+    .alert-error   { background:#7f1d1d!important; color:#fca5a5!important; border:1px solid #991b1b!important; }
+    .alert-warning { background:#78350f!important; color:#fde68a!important; border:1px solid #92400e!important; }
+    .alert-info    { background:#1e3a5f!important; color:#93c5fd!important; border:1px solid #1d4ed8!important; }
   </style>
-  <title>Portafolio Web JX</title>
 </head>
-<body class="bg-background text-foreground font-body h-full flex flex-col">
+<body style="min-height:100vh;display:flex;flex-direction:column;">
+
   {% include "includes/nav.html" %}
+
+  <!-- Flash messages (posicionados en la parte superior) -->
   {% if messages %}
-  <div class="max-w-4xl mx-auto px-4 mt-4 w-full">
+  <div style="position:fixed;top:5rem;right:1rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;max-width:360px;">
     {% for message in messages %}
-      <div class="p-4 mb-4 text-sm rounded-lg 
-        {% if message.tags == 'success' %} bg-green-100 text-green-800 border border-green-200
-        {% elif message.tags == 'error' %} bg-red-100 text-red-800 border border-red-200
-        {% elif message.tags == 'warning' %} bg-yellow-100 text-yellow-800 border border-yellow-200
-        {% else %} bg-blue-100 text-blue-800 border border-blue-200
+      <div style="padding:.85rem 1.1rem;border-radius:.75rem;font-size:.88rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.4);
+        {% if message.tags == 'success' %}background:#14532d;color:#86efac;border:1px solid #166534;
+        {% elif message.tags == 'error' %}background:#7f1d1d;color:#fca5a5;border:1px solid #991b1b;
+        {% elif message.tags == 'warning' %}background:#78350f;color:#fde68a;border:1px solid #92400e;
+        {% else %}background:#1e3a5f;color:#93c5fd;border:1px solid #1d4ed8;
         {% endif %}"
         role="alert">
-        <span class="font-medium">{{ message|capfirst }}</span>
+        {{ message|capfirst }}
       </div>
     {% endfor %}
   </div>
   {% endif %}
-  
-  {% block content %}
-  {% endblock %}
-  
+
+  <!-- Main content -->
+  <main style="flex:1;">
+    {% block content %}{% endblock %}
+  </main>
+
   {% include "includes/footer.html" %}
-  
+
   {% block scripts %}{% endblock %}
-  
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </body>
 </html>
