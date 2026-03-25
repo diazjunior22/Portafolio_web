@@ -370,6 +370,50 @@
 </article>
 
 <style>
+/* Mobile Responsive for Blog Detail */
+@media(max-width:768px){
+  article{padding:4.5rem 0 3rem!important;}
+  article > div{padding:0 1rem!important;}
+  .nn-prose{font-size:1rem;}
+  .nn-prose h2{font-size:1.3rem;padding-left:0.75rem;}
+  .nn-prose h3{font-size:1.1rem;padding-left:0.75rem;}
+  .nn-prose pre{padding:1rem;font-size:0.82rem;}
+  .nn-comment{padding:1rem;}
+  .nn-avatar{width:36px;height:36px;font-size:0.9rem;}
+  .nn-btn-fill,.nn-btn-ghost{padding:0.65rem 1.2rem!important;font-size:0.85rem;}
+}
+@media(max-width:560px){
+  article{padding:4rem 0 2.5rem!important;}
+  article > div{padding:0 0.875rem!important;}
+  article h1{font-size:1.6rem!important;}
+  .nn-prose{font-size:0.95rem;line-height:1.75;}
+  .nn-prose h2{font-size:1.2rem;margin:2rem 0 0.75rem;}
+  .nn-prose h3{font-size:1.05rem;margin:1.5rem 0 0.5rem;}
+  .nn-prose pre{padding:0.875rem;font-size:0.78rem;border-radius:0.6rem;}
+  .nn-prose img{border-radius:0.75rem;margin:1.25rem 0;}
+  .nn-comment{padding:0.875rem;border-radius:0.9rem;}
+  .nn-avatar{width:32px;height:32px;font-size:0.85rem;}
+  .nn-btn-fill,.nn-btn-ghost{padding:0.6rem 1rem!important;font-size:0.82rem;}
+  /* Comment login buttons stack */
+  article > div > div[style*="text-align:center"] > div:last-child{
+    flex-direction:column!important;
+    gap:0.6rem!important;
+  }
+}
+@media(max-width:380px){
+  article{padding:3.5rem 0 2rem!important;}
+  article > div{padding:0 0.75rem!important;}
+  article h1{font-size:1.4rem!important;}
+  .nn-prose{font-size:0.9rem;}
+  .nn-prose h2{font-size:1.1rem;}
+  .nn-prose h3{font-size:1rem;}
+  .nn-prose pre{padding:0.75rem;font-size:0.72rem;}
+  .nn-comment{padding:0.75rem;}
+  .nn-avatar{width:28px;height:28px;font-size:0.8rem;}
+}
+</style>
+
+<style>
 /* Override Django form rendered elements */
 #post-detail p label,
 article p label {
@@ -413,6 +457,15 @@ article form input:focus {
   border-radius: 0 0 .75rem .75rem !important;
   color: #e8e8f0 !important;
   min-height: 130px !important;
+}
+
+/* Mobile font-size to prevent iOS zoom */
+@media(max-width: 768px) {
+  article form textarea,
+  article form input[type=text],
+  .nn-form-input {
+    font-size: 16px !important;
+  }
 }
 </style>
 

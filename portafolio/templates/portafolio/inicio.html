@@ -341,13 +341,6 @@
             </svg>
             Contactar
           </a>
-          <a href="{% static 'CV_Junior_Diaz Palacio_.pdf' %}" class="nn-btn-ghost" download>
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            Descargar CV
-          </a>
         </div>
 
         <!-- Socials -->
@@ -436,10 +429,85 @@
   @media(max-width:768px) {
     .hero-grid {
       grid-template-columns: 1fr !important;
+      gap: 2rem !important;
     }
 
     .nn-float {
       display: none !important;
+    }
+
+    /* Hero section mobile adjustments */
+    .nn-hero {
+      min-height: auto !important;
+      padding-top: 6rem !important;
+      padding-bottom: 3rem !important;
+    }
+
+    /* Stats grid mobile */
+    .nn-hero > div > div:last-child {
+      max-width: 100% !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 0.75rem !important;
+    }
+
+    /* CTA buttons stack on mobile */
+    .nn-hero > div > div:first-child > div:nth-child(4) {
+      flex-direction: column !important;
+      gap: 0.6rem !important;
+    }
+
+    .nn-hero > div > div:first-child > div:nth-child(4) > a {
+      width: 100% !important;
+      justify-content: center !important;
+    }
+  }
+
+  @media(max-width:560px) {
+    .hero-grid {
+      gap: 1.5rem !important;
+    }
+
+    /* Reduce hero padding on small screens */
+    .nn-hero {
+      padding-top: 5rem !important;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+
+    /* Stack CTA buttons vertically */
+    .nn-hero > div > div:first-child > div:nth-child(4) {
+      flex-direction: column !important;
+      width: 100% !important;
+    }
+
+    .nn-hero > div > div:first-child > div:nth-child(4) > a {
+      width: 100% !important;
+      justify-content: center !important;
+    }
+
+    /* Social icons wrap */
+    .nn-hero > div > div:first-child > div:last-child {
+      flex-wrap: wrap !important;
+      justify-content: center !important;
+    }
+  }
+
+  @media(max-width:380px) {
+    .nn-hero {
+      padding-top: 4.5rem !important;
+    }
+
+    /* Stats become more compact */
+    .nn-hero > div > div:last-child {
+      gap: 0.5rem !important;
+    }
+
+    .nn-stat {
+      padding: 0.6rem 0.4rem !important;
+    }
+
+    .nn-stat > div:first-child {
+      font-size: 1.2rem !important;
     }
   }
 </style>
@@ -581,6 +649,49 @@
   @media(max-width:768px) {
     .about-grid {
       grid-template-columns: 1fr !important;
+      gap: 2rem !important;
+    }
+
+    /* About section mobile */
+    section#sobre-mi {
+      padding: 4rem 0 !important;
+    }
+
+    section#sobre-mi > div {
+      padding: 0 1rem !important;
+    }
+
+    /* Highlights grid - 2 columns on tablet */
+    .about-grid > div:first-child > div:last-child {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 0.6rem !important;
+    }
+
+    /* Stack grid - 2 cols on tablet */
+    .about-grid > div:last-child > div:last-child > div {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 0.6rem !important;
+    }
+  }
+
+  @media(max-width:480px) {
+    /* Highlights grid - single column on small mobile */
+    .about-grid > div:first-child > div:last-child {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Stack grid - single column on small mobile */
+    .about-grid > div:last-child > div:last-child > div {
+      grid-template-columns: 1fr !important;
+    }
+
+    section#sobre-mi {
+      padding: 3rem 0 !important;
+    }
+
+    /* Reduce image height */
+    .about-grid > div:last-child > div:first-child img {
+      height: 200px !important;
     }
   }
 </style>
@@ -658,12 +769,56 @@
   @media(max-width:900px) {
     .projects-grid {
       grid-template-columns: repeat(2, 1fr) !important;
+      gap: 1rem !important;
+    }
+  }
+
+  @media(max-width:768px) {
+    section#portafolio {
+      padding: 4rem 0 !important;
+    }
+
+    section#portafolio > div {
+      padding: 0 1rem !important;
+    }
+
+    .projects-grid {
+      gap: 0.875rem !important;
+    }
+
+    /* Card image height mobile */
+    .projects-grid .nn-card .nn-img-wrap {
+      height: 160px !important;
+    }
+
+    /* Card content padding */
+    .projects-grid .nn-card > div {
+      padding: 1rem !important;
     }
   }
 
   @media(max-width:560px) {
     .projects-grid {
       grid-template-columns: 1fr !important;
+    }
+
+    section#portafolio {
+      padding: 3rem 0 !important;
+    }
+
+    /* Card image height mobile */
+    .projects-grid .nn-card .nn-img-wrap {
+      height: 180px !important;
+    }
+  }
+
+  @media(max-width:380px) {
+    .projects-grid .nn-card .nn-img-wrap {
+      height: 150px !important;
+    }
+
+    .projects-grid .nn-card > div {
+      padding: 0.875rem !important;
     }
   }
 </style>
@@ -755,12 +910,56 @@
   @media(max-width:900px) {
     .blog-grid {
       grid-template-columns: repeat(2, 1fr) !important;
+      gap: 1rem !important;
+    }
+  }
+
+  @media(max-width:768px) {
+    section#blog {
+      padding: 4rem 0 !important;
+    }
+
+    section#blog > div {
+      padding: 0 1rem !important;
+    }
+
+    .blog-grid {
+      gap: 0.875rem !important;
+    }
+
+    /* Blog card image height mobile */
+    .blog-grid article > div:first-child {
+      height: 150px !important;
+    }
+
+    /* Blog card content padding */
+    .blog-grid article > div:nth-child(2) {
+      padding: 1rem !important;
     }
   }
 
   @media(max-width:560px) {
     .blog-grid {
       grid-template-columns: 1fr !important;
+    }
+
+    section#blog {
+      padding: 3rem 0 !important;
+    }
+
+    /* Blog card image height mobile */
+    .blog-grid article > div:first-child {
+      height: 170px !important;
+    }
+  }
+
+  @media(max-width:380px) {
+    .blog-grid article > div:first-child {
+      height: 140px !important;
+    }
+
+    .blog-grid article > div:nth-child(2) {
+      padding: 0.875rem !important;
     }
   }
 </style>
@@ -873,6 +1072,57 @@
   @media(max-width:768px) {
     .contact-grid {
       grid-template-columns: 1fr !important;
+      gap: 2rem !important;
+    }
+
+    section#contacto {
+      padding: 4rem 0 !important;
+    }
+
+    section#contacto > div {
+      padding: 0 1rem !important;
+    }
+
+    /* Contact info items grid */
+    .contact-grid > div:first-child > div:nth-child(2) {
+      gap: 0.6rem !important;
+    }
+  }
+
+  @media(max-width:560px) {
+    section#contacto {
+      padding: 3rem 0 !important;
+    }
+
+    .contact-grid {
+      gap: 1.5rem !important;
+    }
+
+    /* Form glass padding */
+    .contact-grid .nn-glass {
+      padding: 1.25rem !important;
+    }
+
+    /* Info items become more compact */
+    .contact-grid .nn-item {
+      padding: 0.75rem !important;
+    }
+  }
+
+  @media(max-width:380px) {
+    /* Contact form on very small screens */
+    .contact-grid .nn-glass {
+      padding: 1rem !important;
+    }
+
+    .contact-grid .nn-item {
+      padding: 0.6rem !important;
+      gap: 0.5rem !important;
+    }
+
+    .contact-grid .nn-icon {
+      width: 36px !important;
+      height: 36px !important;
     }
   }
 
@@ -903,6 +1153,16 @@
   textarea {
     min-height: 110px;
     resize: vertical;
+  }
+
+  /* Mobile font-size to prevent iOS zoom */
+  @media(max-width: 768px) {
+    input[type=text],
+    input[type=email],
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
   }
 </style>
 

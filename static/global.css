@@ -201,3 +201,491 @@ section {
 .magic-card:hover::before {
     opacity: 1;
 }
+
+/* ─── Mobile Responsive Improvements ─────────────────────────── */
+/* Tablet & Small Desktop */
+@media (max-width: 900px) {
+  :root {
+    --gap-size: 60px;
+  }
+
+  section {
+    scroll-margin-top: 70px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  :root {
+    --gap-size: 48px;
+  }
+
+  html, body {
+    font-size: 15px;
+  }
+
+  section {
+    scroll-margin-top: 64px;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  /* Typography scale for mobile */
+  h1, .h1 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  h2, .h2 {
+    font-size: clamp(1.4rem, 4vw, 2rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  h3, .h3 {
+    font-size: clamp(1.1rem, 3vw, 1.4rem) !important;
+  }
+
+  /* Reduce section padding */
+  .nn-hero {
+    padding: 4rem 1rem 2rem !important;
+    min-height: auto !important;
+  }
+
+  /* Grid improvements */
+  .about-grid,
+  .contact-grid,
+  .projects-grid,
+  .blog-grid {
+    gap: 1rem !important;
+  }
+
+  /* Form improvements */
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select {
+    font-size: 16px !important; /* Prevents iOS zoom */
+  }
+}
+
+/* Mobile L */
+@media (max-width: 560px) {
+  html, body {
+    font-size: 14px;
+  }
+
+  section {
+    scroll-margin-top: 56px;
+  }
+
+  /* Hero terminal hidden on mobile */
+  .nn-float {
+    display: none !important;
+  }
+
+  /* Grids to single column */
+  .about-grid,
+  .contact-grid,
+  .projects-grid,
+  .blog-grid,
+  .posts-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.875rem !important;
+  }
+
+  /* Cards improvements */
+  .nn-card,
+  .bl-card {
+    border-radius: 1rem !important;
+  }
+
+  .nn-card > div,
+  .bl-card > div {
+    padding: 1rem !important;
+  }
+
+  /* Buttons sizing */
+  .nn-btn-fill,
+  .nn-btn-ghost {
+    padding: 0.6rem 1.2rem !important;
+    font-size: 0.82rem !important;
+  }
+
+  /* Stats grid */
+  .nn-stat {
+    padding: 0.75rem 0.5rem !important;
+  }
+
+  .nn-stat > div:first-child {
+    font-size: 1.3rem !important;
+  }
+
+  /* Items/skills grid */
+  .nn-item {
+    padding: 0.75rem !important;
+    gap: 0.65rem !important;
+  }
+
+  .nn-icon {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1rem !important;
+  }
+}
+
+/* Mobile M */
+@media (max-width: 480px) {
+  html, body {
+    font-size: 13.5px;
+  }
+
+  /* Hero section adjustments */
+  .nn-hero {
+    padding: 3.5rem 0.875rem 1.5rem !important;
+  }
+
+  /* Hero stats */
+  .nn-hero > div > div:last-child {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5rem !important;
+    max-width: 100% !important;
+  }
+
+  /* Badge sizing */
+  .nn-badge {
+    font-size: 0.65rem !important;
+    padding: 0.22rem 0.65rem !important;
+  }
+
+  /* Social buttons */
+  .nn-social {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  /* Form adjustments */
+  .nn-glass {
+    padding: 1.25rem !important;
+  }
+
+  /* Glass padding */
+  .nn-hero .nn-glass {
+    padding: 1rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* CTA buttons stack */
+  .nn-hero > div > div > div:first-child > div:nth-child(4) {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  .nn-hero > div > div > div:first-child > div:nth-child(4) > a {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* Mobile S - Small phones */
+@media (max-width: 380px) {
+  html, body {
+    font-size: 12.5px;
+  }
+
+  /* Hero adjustments */
+  .nn-hero {
+    padding: 3rem 0.75rem 1.25rem !important;
+  }
+
+  /* Stats become smaller */
+  .nn-stat {
+    padding: 0.5rem 0.35rem !important;
+  }
+
+  .nn-stat > div:first-child {
+    font-size: 1.15rem !important;
+  }
+
+  .nn-stat > div:last-child {
+    font-size: 0.65rem !important;
+  }
+
+  /* Badge minimum */
+  .nn-badge {
+    font-size: 0.6rem !important;
+    padding: 0.18rem 0.5rem !important;
+  }
+
+  /* Items become compact */
+  .nn-item {
+    padding: 0.6rem !important;
+    gap: 0.5rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .nn-icon {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.9rem !important;
+    border-radius: 8px !important;
+  }
+
+  /* Cards padding */
+  .nn-card > div,
+  .bl-card > div {
+    padding: 0.875rem !important;
+  }
+
+  /* Hero text adjustments */
+  .nn-hero h1 {
+    font-size: 1.6rem !important;
+  }
+
+  .nn-hero p {
+    font-size: 0.95rem !important;
+  }
+
+  /* Section titles */
+  section h2 {
+    font-size: 1.5rem !important;
+  }
+
+  /* Footer adjustments */
+  footer .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  footer .grid > div {
+    text-align: center !important;
+  }
+
+  footer .flex.gap-4 {
+    justify-content: center !important;
+  }
+}
+
+/* Safe area insets for notched phones */
+@supports (padding: max(0px)) {
+  .fixed-top {
+    padding-left: max(1rem, env(safe-area-inset-left)) !important;
+    padding-right: max(1rem, env(safe-area-inset-right)) !important;
+  }
+
+  footer {
+    padding-left: max(1rem, env(safe-area-inset-left)) !important;
+    padding-right: max(1rem, env(safe-area-inset-right)) !important;
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* Touch improvements for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .nn-card:hover,
+  .bl-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .nn-card:active,
+  .bl-card:active {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 20px rgba(96, 165, 250, 0.12) !important;
+  }
+
+  .nn-btn-fill:hover,
+  .nn-btn-ghost:hover {
+    transform: none !important;
+  }
+
+  .nn-btn-fill:active {
+    transform: scale(0.98) !important;
+  }
+
+  .nn-social:hover {
+    transform: none !important;
+  }
+
+  .nn-social:active {
+    transform: scale(0.95) !important;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .nn-float,
+  .nn-bounce {
+    animation: none !important;
+  }
+}
+
+/* ─── Card Improvements for Mobile ─────────────────────────────── */
+@media (max-width: 768px) {
+  .nn-card {
+    border-radius: 1rem !important;
+  }
+
+  .nn-card > div {
+    padding: 1rem !important;
+  }
+
+  .nn-card h3 {
+    font-size: 0.95rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .nn-card p {
+    font-size: 0.82rem !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Image heights mobile */
+  .nn-img-wrap {
+    height: 160px !important;
+  }
+
+  /* Badge mobile */
+  .nn-badge {
+    font-size: 0.65rem !important;
+    padding: 0.22rem 0.6rem !important;
+  }
+
+  /* Button mobile */
+  .nn-btn-fill,
+  .nn-btn-ghost {
+    padding: 0.6rem 1.1rem !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .nn-card {
+    border-radius: 0.875rem !important;
+  }
+
+  .nn-card > div {
+    padding: 0.875rem !important;
+  }
+
+  .nn-img-wrap {
+    height: 150px !important;
+  }
+
+  /* Glass card mobile */
+  .nn-glass {
+    padding: 1.25rem !important;
+    border-radius: 1rem !important;
+  }
+
+  /* Item grid mobile */
+  .nn-item {
+    padding: 0.7rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .nn-icon {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 1.05rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .nn-card {
+    border-radius: 0.75rem !important;
+  }
+
+  .nn-card > div {
+    padding: 0.75rem !important;
+  }
+
+  .nn-img-wrap {
+    height: 130px !important;
+  }
+
+  .nn-glass {
+    padding: 1rem !important;
+    border-radius: 0.875rem !important;
+  }
+
+  .nn-item {
+    padding: 0.6rem !important;
+    gap: 0.5rem !important;
+  }
+
+  .nn-icon {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 0.95rem !important;
+    border-radius: 8px !important;
+  }
+}
+
+/* ─── Section Improvements for Mobile ──────────────────────────── */
+@media (max-width: 768px) {
+  section {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  section > div {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+@media (max-width: 560px) {
+  section {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  section h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  section p {
+    font-size: 0.92rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  section h2 {
+    font-size: 1.35rem !important;
+  }
+
+  section > div {
+    padding-left: 0.875rem !important;
+    padding-right: 0.875rem !important;
+  }
+}
+
+/* ─── Button Improvements for Mobile ──────────────────────────── */
+@media (max-width: 560px) {
+  /* CTA buttons stack vertically on small screens */
+  .nn-hero > div > div:first-child > div:nth-child(4),
+  .nn-hero > div > div:first-child > div:nth-child(5) {
+    width: 100% !important;
+  }
+
+  /* Social buttons wrap */
+  .nn-hero > div > div:first-child > div:last-child {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+}

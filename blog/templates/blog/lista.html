@@ -168,8 +168,31 @@
 </section>
 
 <style>
-@media(max-width:900px){.posts-grid{grid-template-columns:repeat(2,1fr)!important;}}
-@media(max-width:560px){.posts-grid{grid-template-columns:1fr!important;}}
+@media(max-width:900px){
+  .posts-grid{grid-template-columns:repeat(2,1fr)!important;gap:1rem!important;}
+  .bl-hero{padding-top:6rem!important;padding-bottom:2.5rem!important;}
+  .bl-hero > div{padding:0 1rem!important;}
+}
+@media(max-width:768px){
+  .posts-grid{gap:0.875rem!important;}
+  .bl-card > div{padding:1rem!important;}
+  .bl-img-wrap{height:170px!important;}
+  .bl-search{flex-direction:column!important;border-radius:0.75rem!important;}
+  .bl-search input{border-radius:0.75rem!important;padding:0.9rem 1rem!important;}
+  .bl-search button{border-radius:0.75rem!important;width:100%;margin-top:0.5rem;}
+}
+@media(max-width:560px){
+  .posts-grid{grid-template-columns:1fr!important;}
+  .bl-hero{padding-top:5rem!important;padding-bottom:2rem!important;}
+  .bl-card > div{padding:0.875rem!important;}
+  .bl-img-wrap{height:160px!important;}
+}
+@media(max-width:380px){
+  .bl-hero > div{padding:0 0.875rem!important;}
+  .bl-hero h1{font-size:1.6rem!important;}
+  .bl-img-wrap{height:140px!important;}
+  .bl-card > div{padding:0.75rem!important;}
+}
 </style>
 
 {% endblock content %}
